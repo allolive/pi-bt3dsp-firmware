@@ -1,0 +1,5 @@
+config BR2_PACKAGE_BT3DD
+	bool "bt3dd"
+	help
+	  The Bluetooth 3D display daemon: host vsyncs over USB serial in,
+	  3DSP broadcast to shutter glasses out.

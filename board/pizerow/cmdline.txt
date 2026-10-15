@@ -1,0 +1,1 @@
+g_serial.n_ports=2 console=ttyGS1,115200 rdinit=/sbin/bt3dd panic=1 quiet

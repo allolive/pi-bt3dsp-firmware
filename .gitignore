@@ -1,0 +1,7 @@
+buildroot/
+output/
+__pycache__/
+.shims/
+.test_sync
+output-min/
+dist/

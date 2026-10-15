@@ -1,0 +1,28 @@
+# Booted over USB by rpiboot (no SD card): every file below is sent by the host.
+# The cut-down GPU firmware: 850 KB instead of 3 MB, and enough with no video.
+# (An afternoon's "start_cd breaks Bluetooth" was one confounded run; glasses
+# held on start_cd in RUNS.md 2026-10-14 17:42.)
+start_file=start_cd.elf
+fixup_file=fixup_cd.dat
+gpu_mem=16
+kernel=zImage
+initramfs rootfs.img followkernel
+disable_splash=1
+boot_delay=0
+
+# The OTG port as a USB device: the host sees two serial ports (ttyACM).
+dtoverlay=dwc2,dr_mode=peripheral
+
+# Least power: Wi-Fi unpowered (Bluetooth stays), no video out, LED off,
+# CPU capped at its lowest clock, no SD card polling, no audio.
+dtoverlay=disable-wifi
+hdmi_ignore_hotplug=1
+enable_tvout=0
+dtparam=act_led_trigger=none
+dtparam=act_led_activelow=on
+arm_freq=700
+dtparam=sd_poll_once=on
+dtparam=audio=off
+
+# Bluetooth stays on the PL011 UART (the Zero W default): its baud rate does
+# not follow the core clock, unlike the mini UART that miniuart-bt would give it.

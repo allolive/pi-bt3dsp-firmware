@@ -1,0 +1,1 @@
+g_serial.n_ports=2 console=tty1 console=ttyGS1,115200 loglevel=7

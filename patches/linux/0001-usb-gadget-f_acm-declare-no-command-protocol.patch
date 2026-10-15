@@ -1,0 +1,21 @@
+From: allolive <160342668+allolive@users.noreply.github.com>
+Subject: [PATCH] usb: gadget: f_acm: declare no command protocol
+
+The Pi's serial ports carry the bt3dd line protocol, not modem AT commands.
+Declared as AT (V.25ter), ModemManager on a desktop host grabs both ports
+for ~30 s at every boot and types AT and QCDM probes into them. With no
+protocol declared it leaves them alone, on any host, without a udev rule.
+
+Signed-off-by: allolive <160342668+allolive@users.noreply.github.com>
+---
+--- a/drivers/usb/gadget/function/f_acm.c	2026-10-14 12:56:50.084263891 -0400
++++ b/drivers/usb/gadget/function/f_acm.c	2026-10-14 12:56:50.087055715 -0400
+@@ -885,7 +885,7 @@
+ 	opts = kzalloc(sizeof(*opts), GFP_KERNEL);
+ 	if (!opts)
+ 		return ERR_PTR(-ENOMEM);
+-	opts->protocol = USB_CDC_ACM_PROTO_AT_V25TER;
++	opts->protocol = USB_CDC_PROTO_NONE;
+ 	opts->func_inst.free_func_inst = acm_free_instance;
+ 	mutex_init(&opts->lock);
+ 	ret = gserial_alloc_line(&opts->port_num);

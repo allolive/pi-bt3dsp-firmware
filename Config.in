@@ -1,0 +1,1 @@
+source "$BR2_EXTERNAL_PIBT3DSP_PATH/package/bt3dd/Config.in"
